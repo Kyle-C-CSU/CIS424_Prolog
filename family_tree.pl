@@ -1,13 +1,13 @@
 
 male(mushu).
 male(tangdee).
-male(X):-father(X,_).
+male(X):-father(X,_).	%(father X, of _)
 female(mulan).
 female(beumei).
 female(gugu).
 female(X):-mother(X,_).
 
-father(baba,mushu).
+father(baba,mushu).	
 father(baba,mulan).
 father(yeye,baba).
 father(yeye,gugu).
@@ -41,23 +41,32 @@ descendant: mother or father
 
 /*rules*/
 parent(X,Y):- father(X,Y).
+
 parent(X,Y):- mother(X,Y).
+
 grandparent(X,Z):-
 	parent(X,Y),  /*define relationship that grandparent is the parent of a parent*/
-	parent(Y,Z).  
+	parent(Y,Z).
+  
 sibling(X,Y):- 
 	parent(Z,X),
 	parent(Z,Y),
-	X /= Y.		
+	not(X=Y).
+	
 brother(X,Y):-
 	sibling(X,Y),  /*brother is a sibling*/
 	male(X).       /*brother is male*/
+
 aunt(X,Y):- 
 	parent(Z,Y),  /*neice parent is defined here*/
 	sibling(X,Z), /*aunt is sister with neice mother*/
 	female(X).    /*aunt is female*/
+
 grandson(X,Y):-
 	grandparent(Y,X), /*links relationship between grandparent*/
-	male(X).      /*grandson is male*/
-/*if person has relationship with parent then they are descendants of those parents*/
-descendant(X,Y):- parent(Y,X). 
+	male(X).     	  /*grandson is male*/
+
+%if person has relationship with parent then they are descendants of those parents
+
+descendant(X,Y):- parent(Y,X).
+ 
