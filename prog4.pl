@@ -72,16 +72,20 @@ grandson(X,Y):-
 descendant(X,Y):- parent(Y,X).
  
 % q2: rules that find the final element of a list
+
+%append will add a list onto another list and return one list 
 append([],L,L).
 append([H|T1],L,[H|T2]):-
         append(T1,L,T2).
-
+%rev reverses the list ex. rev([1,2,3],[3,2,1]). is true
 rev([],[]).
 rev([H|T],R):- rev(T,RL),append(RL,[H],R).
 
+%head returns the first element in the list 
 head([H|T],H).
 
-final(L,E):- rev(L,R),head(R,E).
+%final will reverse the list then return the head of the new list
+final([L],E):- rev(L,R),head(R,E).
 
 % q3: parser program based on given grammar
 match(X, [X|T], T).
