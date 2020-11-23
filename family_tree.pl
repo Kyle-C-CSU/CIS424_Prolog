@@ -58,7 +58,7 @@ brother(X,Y):-
 	male(X).       /*brother is male*/
 
 aunt(X,Y):- 
-	parent(Z,Y),  /*neice parent is defined here*/
+	parent(Z,Y),  /*niece parent is defined here*/
 	sibling(X,Z), /*aunt is sister with neice mother*/
 	female(X).    /*aunt is female*/
 
