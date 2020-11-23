@@ -72,8 +72,16 @@ grandson(X,Y):-
 descendant(X,Y):- parent(Y,X).
  
 % q2: rules that find the final element of a list
-final(H, [ H ]).
-final(H, [ _ | T ]) :- final(H,T).
+append([],L,L).
+append([H|T1],L,[H|T2]):-
+        append(T1,L,T2).
+
+rev([],[]).
+rev([H|T],R):- rev(T,RL),append(RL,[H],R).
+
+head([H|T],H).
+
+finalelem(L,E):- rev(L,R),head(R,E).
 
 % q3: parser program based on given grammar
 match(X, [X|T], T).
