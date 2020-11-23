@@ -85,7 +85,8 @@ rev([H|T],R):- rev(T,RL),append(RL,[H],R).
 head([H|T],H).
 
 %final will reverse the list then return the head of the new list
-final([L],E):- rev(L,R),head(R,E).
+final(L,[L]). 
+final(L,E):- rev(L,R),head(R,E).
 
 % q3: parser program based on given grammar
 match(X, [X|T], T).
